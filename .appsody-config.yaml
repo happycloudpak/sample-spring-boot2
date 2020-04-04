@@ -1,4 +1,3 @@
 id: "20200404234914.38510583"
 project-name: sample-spring-boot2
-#stack: default-route-openshift-image-registry.apps.hcp.darumtech.net/kabanero/skt-spring-boot2:0.3.24
 stack: image-registry.openshift-image-registry.svc:5000/kabanero/skt-spring-boot2:0.3.24
