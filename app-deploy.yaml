@@ -1,0 +1,110 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  annotations:
+    architecture: x86_64
+    authoritative-source-url: registry.access.redhat.com
+    build-date: 2019-10-29T16:44:53.794580
+    commit.image.appsody.dev/author: user1 <user1@kebhana.com>
+    commit.image.appsody.dev/committer: user1 <user1@kebhana.com>
+    commit.image.appsody.dev/date: Sat Apr 4 23:48:04 2020 +0900
+    commit.image.appsody.dev/message: first commit
+    commit.stack.appsody.dev/author: happycloudpak <happycloudpak@gmail.com>
+    commit.stack.appsody.dev/committer: happycloudpak <happycloudpak@gmail.com>
+    commit.stack.appsody.dev/contextDir: /skt-spring-boot2
+    commit.stack.appsody.dev/date: Sat Apr 4 21:52:48 2020 +0900
+    commit.stack.appsody.dev/message: update nodejs-express
+    description: This image is the Kabanero development container for the java-spring-boot2
+      stack
+    distribution-scope: public
+    image.opencontainers.org/created: "2020-04-04T23:49:15+09:00"
+    image.opencontainers.org/documentation: https://github.com/happycloudpak/sample-spring-boot2
+    image.opencontainers.org/revision: ec45ae9ac2203ad405c990e1c7177a3a11add0bf-modified
+    image.opencontainers.org/source: https://github.com/happycloudpak/sample-spring-boot2/tree/HEAD
+      -> origin
+    image.opencontainers.org/url: https://github.com/happycloudpak/sample-spring-boot2
+    k8s.io/description: The Universal Base Image is designed and engineered to be
+      the base layer for all of your containerized applications, middleware and utilities.
+      This base image is freely redistributable, but Red Hat only supports Red Hat
+      technologies through subscriptions for Red Hat products. This image is maintained
+      by Red Hat and updated regularly.
+    k8s.io/display-name: Red Hat Universal Base Image 8
+    maintainer: Red Hat, Inc.
+    name: kabanero/java-spring-boot2
+    openshift.io/expose-services: ""
+    openshift.io/tags: base rhel8
+    redhat.com/build-host: cpt-1002.osbs.prod.upshift.rdu2.redhat.com
+    redhat.com/component: ubi8-container
+    redhat.com/license_terms: https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI
+    release: "277"
+    stack.appsody.dev/authors: Erin Schnabel <schnabel@us.ibm.com>, Ozzy Osborne <ozzy@ca.ibm.com>
+    stack.appsody.dev/configured: default-route-openshift-image-registry.apps.hcp.darumtech.net/kabanero/skt-spring-boot2:0.3.24
+    stack.appsody.dev/created: "2020-04-04T22:36:22+09:00"
+    stack.appsody.dev/description: SKT-Spring Boot using OpenJ9 and Maven
+    stack.appsody.dev/documentation: https://github.com/kubepia/skt-stack/tree/HEAD
+      -> origin/skt-spring-boot2/README.md
+    stack.appsody.dev/licenses: Apache-2.0
+    stack.appsody.dev/revision: bba5f474afb1567c5538dea2be0f1dc014b11b86-modified
+    stack.appsody.dev/source: https://github.com/kubepia/skt-stack/tree/HEAD -> origin/skt-spring-boot2/image
+    stack.appsody.dev/tag: image-registry.openshift-image-registry.svc:5000/kabanero/skt-spring-boot2:0.3.24
+    stack.appsody.dev/title: Spring Boot®
+    stack.appsody.dev/url: https://github.com/kubepia/skt-stack/tree/HEAD -> origin/skt-spring-boot2
+    summary: Image for Kabanero java-spring-boot2 development
+    url: https://access.redhat.com/containers/#/registry.access.redhat.com/ubi8/images/8.1-277
+    vcs-ref: c42933bcdbf9f1c232e981a5e40de257c3534c8e
+    vcs-type: git
+    vendor: Kabanero
+    version: 0.3.23
+  creationTimestamp: null
+  labels:
+    image.opencontainers.org/title: sample-spring-boot2
+    stack.appsody.dev/id: skt-spring-boot2
+    stack.appsody.dev/version: 0.3.24
+  name: sample-spring-boot2
+spec:
+  applicationImage: image-registry.openshift-image-registry.svc:5000/kabanero/sample-spring-boot2
+  autoscaling:
+    maxReplicas: 4
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 50
+  createKnativeService: false
+  env:
+  - name: AUTH_API_URI
+    value: http://login.apps.msg.darumtech.net
+  expose: true
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/liveness
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  monitoring:
+    endpoints:
+    - path: /actuator/prometheus
+    labels:
+      k8s-app: sample-spring-boot2
+  pullPolicy: Always
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/health
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+    timeoutSeconds: 1
+  replicas: 1
+  resourceConstraints:
+    limits:
+      cpu: "2"
+      memory: 512Mi
+    requests:
+      cpu: "0.5"
+  service:
+    annotations:
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/scrape: "true"
+    port: 8080
+    type: NodePort
+  stack: skt-spring-boot2
+  version: 1.0.0
